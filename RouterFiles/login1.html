@@ -1,0 +1,306 @@
+﻿<!doctype html>
+<html>
+<head>
+	<title>D30-Gateway Manager</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="renderer" content="webkit|ie-stand">
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-control" content="no-cache">
+	<meta http-equiv="Cache" content="no-cache">
+	<meta http-equiv="imagetoolbar" content="no" />
+	<meta name="format-detection" content="telephone=no" />	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<link rel="stylesheet" href="css/cm-base.css">
+	<!--样式风格-->
+	<link rel="stylesheet" type="text/css" href="css/color1.css"/>
+	<!--样式风格结束-->
+	<link rel="stylesheet" type="text/css" href="css/cm-style-main.css"/>
+	<link rel="stylesheet" href="css/jquery-ui.min.css">
+	<link rel="stylesheet" href="css/ui.jqgrid.css">
+	<script src="js/jquery-3.6.0.min.js"></script>
+	<script src="js/jquery-migrate.min.js"></script>	
+	<% getWeb("language_js"); %>		
+	<script src="js/cm-common.js"></script>	
+	<script src="js/jqgrid/grid.locale-en.js"></script>
+	<script src="js/jqgrid/grid.locale-cn.js"></script>
+	<script src="js/jqgrid/jquery.jqGrid.min.js"></script>
+	<script src="js/css3-mediaqueries.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/html5.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/selectivizr-min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		/*根据不同的客户端(这里指移动端和pc端)引入样式*/
+       var includeLinkStyle = function (url) {
+       var link = document.createElement('link');
+       link.rel = 'stylesheet';
+       link.type = 'text/css';
+       link.href = url;
+       document.getElementsByTagName('head')[0].appendChild(link);
+     };
+     var browserRedirect = function () {
+       /* 判断是pc端还是移动端  网上有很多，我只用其中一种演示*/
+//21     var sUserAgent = navigator.userAgent.toLowerCase();
+//22     var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+//23     var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+//24     var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+//25     var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+//26     var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+//27     var bIsAndroid = sUserAgent.match(/android/i) == "android";
+//28     var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+//29     var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+//		alert(common.functions.getSiLevel());
+		if(common.functions.getSiLevel()==0||common.functions.getSiLevel()==1){
+			includeLinkStyle("css/cm-style-level1.css");
+		}else if(common.functions.getSiLevel()==2){
+			includeLinkStyle("css/cm-style-level2.css");
+		}else{
+			includeLinkStyle("css/cm-style-level3.css");
+		}
+		
+       /* 根据不同的客户端引入样以及加载页面 */
+//31     if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+//32       console.log("phone");
+//33       /*includeLinkStyle("样式地址");*/
+//34       includeLinkStyle("mobile.css");
+//35       $('body').load('mobile-index.html');
+//36     } else {
+//37       console.log("pc");
+//38       includeLinkStyle("pc.css");
+//39       $('body').load('pc-index.html');
+//40     }
+     };
+     browserRedirect();
+	</script>
+	<style type="text/css">
+		#mainColor{
+			width: 100px;
+			position: absolute;
+			top: 20px;
+			left: 50px;
+			padding: 5px;
+			z-index: 100;
+		}
+		.sedow{
+			box-shadow: 0px 0px 10px #333;
+			border: solid 2px #ccc;
+		}
+		#mainStyle{
+			padding:5px 10px;
+			text-align: center;
+			background: rgba(30,30,30,.5);
+			border-radius: 2px;
+			cursor: pointer;
+		}
+		#mainColor ul{
+			display: none;
+			padding-left: 25px;
+		}
+		#mainColor li{
+			width: 20px;
+			height: 20px;
+			border-radius: 10px;
+			cursor: pointer;
+			margin: 10px 0;
+		}
+		#mainColor li:nth-child(1){
+			background: rgba(129,148,170,.9);
+		}
+		#mainColor li:nth-child(2){
+			background: rgba(34,203,100,.9);
+		}
+		#mainColor li:nth-child(3){
+			background: rgba(40,138,221,.9);
+		}
+		#mainColor li:nth-child(4){
+			background: rgba(0,155,219,.9);
+		}
+		#mainColor li:nth-child(5){
+			background: rgba(49,166,107,.9);
+		}
+		#mainColor li:nth-child(6){
+			background: rgba(218,67,78,.9);
+		}
+		#mainColor li:nth-child(7){
+			background: rgba(229,98,129,.9);
+		}
+		#mainColor li:nth-child(8){
+			background: rgba(177,99,159,.9);
+		}
+		#mainColor li:nth-child(9){
+			background: rgba(107,81,192,.9);
+		}
+		#mainColor li:nth-child(10){
+			background: rgba(89,92,160,.9);
+		}
+		#mainColor li:nth-child(11){
+			background: rgba(48,116,193,.9);
+		}
+		#mainColor li:nth-child(12){
+			background: rgba(0,130,154,.9);
+		}
+		#mainColor li:nth-child(13){
+			background: rgba(21,156,119,.9);
+		}
+		#mainColor li:nth-child(14){
+			background: rgba(79,176,172,.9);
+		}
+		#mainColor li:nth-child(15){
+			background: rgba(122,197,196,.9);
+		}
+		#mainColor li:nth-child(16){
+			background: rgba(155,183,214,.9);
+		}
+		#mainColor li:nth-child(17){
+			background: rgba(128,77,77,.9);
+		}
+		#mainColor li:nth-child(18){
+			background: rgba(240,188,89,.9);
+		}
+		#mainColor li:nth-child(19){
+			background: rgba(207,186,170,.9);
+		}
+
+	</style>
+	<script type="text/javascript">
+		$(function(){
+			var n=0;						
+			$('#mainColor li').on('click',function(){
+				var index=$(this).index();				
+				switch (index){
+					case 0:
+						includeLinkStyle("css/color1.css");					
+						break;
+					case 1:
+						includeLinkStyle("css/color2.css");
+						break;
+					case 2:
+						includeLinkStyle("css/color3.css");
+						break;
+					case 3:
+						includeLinkStyle("css/color4.css");
+						break;
+					case 4:
+						includeLinkStyle("css/color5.css");
+						break;
+					case 5:
+						includeLinkStyle("css/color6.css");
+						break;
+					case 6:
+						includeLinkStyle("css/color7.css");
+						break;
+					case 7:
+						includeLinkStyle("css/color8.css");
+						break;
+					case 8:
+						includeLinkStyle("css/color9.css");
+						break;
+					case 9:
+						includeLinkStyle("css/color10.css");
+						break;
+					case 10:
+						includeLinkStyle("css/color11.css");
+						break;
+					case 11:
+						includeLinkStyle("css/color12.css");
+						break;
+					case 12:
+						includeLinkStyle("css/color13.css");
+						break;
+					case 13:
+						includeLinkStyle("css/color14.css");
+						break;
+					case 14:
+						includeLinkStyle("css/color15.css");
+						break;
+					case 15:
+						includeLinkStyle("css/color16.css");
+						break;
+					case 16:
+						includeLinkStyle("css/color17.css");
+						break;
+					case 17:
+						includeLinkStyle("css/color18.css");
+						break;
+					case 18:
+						includeLinkStyle("css/color19.css");
+						break;
+					default:
+						includeLinkStyle("css/color3.css");
+						break;
+				};	
+					$(this).addClass('sedow').siblings('li').removeClass('sedow');	
+				var LinkList=$('head link');
+				n=n+1;
+				if(n>=2){					
+					LinkList.eq(-2).remove();
+				}																		
+			});
+			$("#mainStyle").on('click',function(){
+				$('#mainUl').slideToggle();
+			});
+			      if(window.location.host!="192.168.20.1"){
+		console.log("the login levin is");	      	
+      	console.log(common.functions.getSiLevel());
+
+      	$('section[name="login_ctrl1"]').html('<a href="javascript:void(0);" id="login">Login</a><img src="images/pic/logout.png" alt="" />');	
+      	}
+		})
+	</script>
+</head>
+<body>
+	<div class="main_path">
+		<!--div id="mainColor">
+			<input type="button" name="mainStyle" id="mainStyle" value="页面风格" />
+			<ul id="mainUl">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div-->
+		
+		
+		<content>
+			<!-- 头部 -->
+			<header id="header">
+				<hgroup class="logo"><a href="#">D3.0 Voice Cable Gateway</a>
+					<i title="This is the Newest Version！"></i>
+				</hgroup>
+				<section class="search" name="login_ctrl1">				
+				</section>
+			</header>
+			<!-- 内容 -->
+			<article id="content">
+				<!-- 左侧导航 -->
+				<nav>
+					<ul id="navUl">
+						
+					</ul>
+				</nav>
+				<!-- 右侧信息 -->
+				<article class="infor"></article>
+			</article>		
+		</content>
+		<!-- 底部 -->
+		<footer id="footer"><p>（copyright &copy;   2020 Radiotech All Right Reserved）</p></footer>
+	</div>
+</body>
+</html>

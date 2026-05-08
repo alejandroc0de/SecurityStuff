@@ -1,0 +1,401 @@
+﻿<!doctype html>
+<html>
+<head>
+	<title>D30-Gateway Manager</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="renderer" content="webkit|ie-stand">
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-control" content="no-cache">
+	<meta http-equiv="Cache" content="no-cache">
+	<meta http-equiv="imagetoolbar" content="no" />
+	<meta name="format-detection" content="telephone=no" />	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<link rel="stylesheet" href="css/cm-base.css">
+	<!--样式风格-->
+	<link rel="stylesheet" type="text/css" href="css/color1.css"/>
+	<!--样式风格结束-->
+	<link rel="stylesheet" type="text/css" href="css/cm-style-main.css"/>
+	<link rel="stylesheet" href="css/jquery-ui.min.css">
+	<link rel="stylesheet" href="css/ui.jqgrid.css">
+	<script src="js/jquery-3.6.0.min.js"></script>
+	<script src="js/jquery-migrate.min.js"></script>	
+	<% getWeb("language_js"); %>		
+	<script src="js/cm-common.js"></script>	
+	<script src="js/jqgrid/grid.locale-en.js"></script>
+	<script src="js/jqgrid/grid.locale-cn.js"></script>
+	<script src="js/jqgrid/jquery.jqGrid.min.js"></script>
+	<script src="js/css3-mediaqueries.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/html5.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/selectivizr-min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		/*根据不同的客户端(这里指移动端和pc端)引入样式*/
+       var includeLinkStyle = function (url) {
+       var link = document.createElement('link');
+       link.rel = 'stylesheet';
+       link.type = 'text/css';
+       link.href = url;
+       document.getElementsByTagName('head')[0].appendChild(link);
+     };
+     var browserRedirect = function () {
+       /* 判断是pc端还是移动端  网上有很多，我只用其中一种演示*/
+//21     var sUserAgent = navigator.userAgent.toLowerCase();
+//22     var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+//23     var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+//24     var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+//25     var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+//26     var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+//27     var bIsAndroid = sUserAgent.match(/android/i) == "android";
+//28     var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+//29     var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+//		alert(common.functions.getSiLevel());
+		if(common.functions.getSiLevel()==0||common.functions.getSiLevel()==1){
+			includeLinkStyle("css/cm-style-level1.css");
+		}else if(common.functions.getSiLevel()==2){
+			includeLinkStyle("css/cm-style-level2.css");
+		}else{
+			includeLinkStyle("css/cm-style-level3.css");
+		}
+		
+       /* 根据不同的客户端引入样以及加载页面 */
+//31     if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+//32       console.log("phone");
+//33       /*includeLinkStyle("样式地址");*/
+//34       includeLinkStyle("mobile.css");
+//35       $('body').load('mobile-index.html');
+//36     } else {
+//37       console.log("pc");
+//38       includeLinkStyle("pc.css");
+//39       $('body').load('pc-index.html');
+//40     }
+     };
+     browserRedirect();
+	</script>
+	<style type="text/css">
+		#mainColor{
+			width: 100px;
+			position: absolute;
+			top: 20px;
+			left: 50px;
+			padding: 5px;
+			z-index: 100;
+		}
+		.sedow{
+			box-shadow: 0px 0px 10px #333;
+			border: solid 2px #ccc;
+		}
+		#mainStyle{
+			padding:5px 10px;
+			text-align: center;
+			background: rgba(30,30,30,.5);
+			border-radius: 2px;
+			cursor: pointer;
+		}
+		#mainColor ul{
+			display: none;
+			padding-left: 25px;
+		}
+		#mainColor li{
+			width: 20px;
+			height: 20px;
+			border-radius: 10px;
+			cursor: pointer;
+			margin: 10px 0;
+		}
+		#mainColor li:nth-child(1){
+			background: rgba(129,148,170,.9);
+		}
+		#mainColor li:nth-child(2){
+			background: rgba(34,203,100,.9);
+		}
+		#mainColor li:nth-child(3){
+			background: rgba(40,138,221,.9);
+		}
+		#mainColor li:nth-child(4){
+			background: rgba(0,155,219,.9);
+		}
+		#mainColor li:nth-child(5){
+			background: rgba(49,166,107,.9);
+		}
+		#mainColor li:nth-child(6){
+			background: rgba(218,67,78,.9);
+		}
+		#mainColor li:nth-child(7){
+			background: rgba(229,98,129,.9);
+		}
+		#mainColor li:nth-child(8){
+			background: rgba(177,99,159,.9);
+		}
+		#mainColor li:nth-child(9){
+			background: rgba(107,81,192,.9);
+		}
+		#mainColor li:nth-child(10){
+			background: rgba(89,92,160,.9);
+		}
+		#mainColor li:nth-child(11){
+			background: rgba(48,116,193,.9);
+		}
+		#mainColor li:nth-child(12){
+			background: rgba(0,130,154,.9);
+		}
+		#mainColor li:nth-child(13){
+			background: rgba(21,156,119,.9);
+		}
+		#mainColor li:nth-child(14){
+			background: rgba(79,176,172,.9);
+		}
+		#mainColor li:nth-child(15){
+			background: rgba(122,197,196,.9);
+		}
+		#mainColor li:nth-child(16){
+			background: rgba(155,183,214,.9);
+		}
+		#mainColor li:nth-child(17){
+			background: rgba(128,77,77,.9);
+		}
+		#mainColor li:nth-child(18){
+			background: rgba(240,188,89,.9);
+		}
+		#mainColor li:nth-child(19){
+			background: rgba(207,186,170,.9);
+		}
+
+	</style>
+	<script type="text/javascript">
+		$(function(){
+			var n=0;						
+			$('#mainColor li').on('click',function(){
+				var index=$(this).index();				
+				switch (index){
+					case 0:
+						includeLinkStyle("css/color1.css");					
+						break;
+					case 1:
+						includeLinkStyle("css/color2.css");
+						break;
+					case 2:
+						includeLinkStyle("css/color3.css");
+						break;
+					case 3:
+						includeLinkStyle("css/color4.css");
+						break;
+					case 4:
+						includeLinkStyle("css/color5.css");
+						break;
+					case 5:
+						includeLinkStyle("css/color6.css");
+						break;
+					case 6:
+						includeLinkStyle("css/color7.css");
+						break;
+					case 7:
+						includeLinkStyle("css/color8.css");
+						break;
+					case 8:
+						includeLinkStyle("css/color9.css");
+						break;
+					case 9:
+						includeLinkStyle("css/color10.css");
+						break;
+					case 10:
+						includeLinkStyle("css/color11.css");
+						break;
+					case 11:
+						includeLinkStyle("css/color12.css");
+						break;
+					case 12:
+						includeLinkStyle("css/color13.css");
+						break;
+					case 13:
+						includeLinkStyle("css/color14.css");
+						break;
+					case 14:
+						includeLinkStyle("css/color15.css");
+						break;
+					case 15:
+						includeLinkStyle("css/color16.css");
+						break;
+					case 16:
+						includeLinkStyle("css/color17.css");
+						break;
+					case 17:
+						includeLinkStyle("css/color18.css");
+						break;
+					case 18:
+						includeLinkStyle("css/color19.css");
+						break;
+					default:
+						includeLinkStyle("css/color3.css");
+						break;
+				};	
+					$(this).addClass('sedow').siblings('li').removeClass('sedow');	
+				var LinkList=$('head link');
+				n=n+1;
+				if(n>=2){					
+					LinkList.eq(-2).remove();
+				}																		
+			});
+			$("#mainStyle").on('click',function(){
+				$('#mainUl').slideToggle();
+			});
+		})
+	</script>
+</head>
+<body>
+	<div class="main_path">
+		<!--div id="mainColor">
+			<input type="button" name="mainStyle" id="mainStyle" value="页面风格" />
+			<ul id="mainUl">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div-->
+		
+		
+		<content>
+			<!-- 头部 -->
+			<header id="header">
+				<hgroup class="logo"><a href="#">D3.0 Voice Cable Gateway</a>
+					<i title="This is the Newest Version！"></i>
+				</hgroup>
+				<section class="search" name="login_ctrl">				
+				</section>
+			</header>
+			<!-- 内容 -->
+			<article id="content">
+				<!-- 左侧导航 -->
+				<nav>
+					<ul id="navUl">
+						
+					</ul>
+				</nav>
+				<!-- 右侧信息 -->
+				<article class="infor">
+				<section class="infor_box cdevice">
+				<!-- cm info -->
+				<h2 id="cm_info">
+					<label class="selected" name="lab_base_info"><icon class="wifiicon"></icon><!--基本信息--></label>
+					<label  name="lab_prov_state"><icon class="routeicon"></icon><!--上线状态--></label>
+					<label name="lab_ds_status"><icon class="whtielist"></icon><!--下行状态--></label>	
+					<label name="lab_us_status"><icon class="lybicon"></icon><!--上行状态--></label>				
+					<span><i id="cm_info_refresh" class="refresh"></i><i class="open"></i></span>
+				</h2>
+
+				<!-- ds info -->
+				<ul class="wan_select " >	
+					<li id="device_0" style="display:block" >
+						<ul class="running_list"  >						
+							<li><span name="span_bs_freq_plan"><!--Docsis规范:--></span><n id="bs_freq_plan">---</n></li>
+							<li><span name="span_bs_mac"><!--MAC地址：--></span><n id="bs_mac">---</n></li>
+							<li><span name="span_bs_model_name"><!--项目名称：--></span><n id="bs_model_name">---</n></li>
+							<li><span name="span_bs_serialn_umber"><!--序列号：--></span><n id="bs_serialn_umber">---</n></li>
+							<li><span name="span_bs_boot_ver"><!--引导程序版本：--></span><n id="bs_boot_ver">---</n></li>
+							<li><span name="span_bs_hw_ver"><!--硬件版本：--></span><n id="bs_hw_ver">---</n></li>
+							<li><span name="span_bs_sw_ver"><!--软件版本：--></span><n id="bs_sw_ver">---</n></li>		
+							<li><span name="span_bs_ca_state"><!--证书状态：--></span><n id="bs_ca_state">---</n></li>
+							<li><span name="span_bs_up_time"><!--运行时间:--></span><n id="bs_up_time">--- seconds</n></li>		
+						</ul>	
+				  </li>
+				  <li id="device_1"  style="display:none">
+				  	<ul class="running_list" >		
+							<li><span name="span_pv_provstate">上线状态:</span><n id="pv_provstate">---</n></li>
+							<li><span name="span_pv_cm_ip">CM IP地址：</span><n id="pv_cm_ip">0.0.0.0</n></li>		
+							<li><span name="span_pv_ds_state">下行状态：</span><n id="pv_ds_state">---</n></li>
+							<li><span name="span_pv_ds_freq">下行频率：</span><n id="pv_ds_freq">---</n></li>
+							<li><span name="span_pv_us_state">上行状态：</span><n id="pv_us_state">---</n></li>
+							<li><span name="span_pv_us_freq">上行频率：</span><n id="pv_us_freq">---</n></li>		
+							<li><span name="span_pv_cm_router_srv">网关地址：</span><n id="pv_cm_router_srv">0.0.0.0</n></li>
+							<li><span name="span_pv_cm_dhcp_srv">DHCP服务器地址：</span><n id="pv_cm_dhcp_srv">0.0.0.0</n></li>
+							<li><span name="span_pv_cm_log_srv">日志服务器地址：</span><n id="pv_cm_log_srv">0.0.0.0</n></li>		
+							<li><span name="span_pv_cm_tod_srv">时间服务器地址：</span><n id="pv_cm_tod_srv">0.0.0.0</n></li>
+							<li><span name="span_pv_cm_tftp_srv">Tftp服务器地址：</span><n id="pv_cm_tftp_srv">0.0.0.0</n></li>
+							<li><span name="span_pv_cm_cfg_file">配置文件名称：</span><n id="pv_cm_cfg_file">NULL</n></li>
+						</ul>
+				  </li>
+					<li id="device_2" style="display:none">
+							<table id="gridTbl_5"></table>
+				    	<div id="gridPager_5"></div>
+				  </li>		
+					<li id="device_3" style="display:none">
+							<table id="gridTbl_6"></table>
+				    	<div id="gridPager_6"></div>
+				  </li>	
+				</ul>
+
+				<!-- us info -->
+				<!--<ul class="wan_select cdevicelist"  id="device_3" style="display:none" >-->		
+					
+				<!--</ul>-->
+
+
+			<h2 name="h2_cm_tune">
+				<icon class="usbicon"></icon><!--手动锁频--><span><i class="open"></i></span>
+			</h2>
+				<ul class="wan_select">
+					<li class="text">
+						<span name="span_tune_ds_freq"><!--下行频率--></span>
+						<input value="" maxlength="8" type="text" id="ds_freq">
+					</li>
+					<li class="text">
+						<span name="span_tune_us_chn_id"><!--上行通道ID--></span>
+						<input value="" maxlength="3" type="text" id="us_chn_id">
+					</li>
+					<li><button style="margin-top:60px;" class="enterbut" id ="cm_save_tune"><!--手动锁频--></button></li>
+				</ul>
+				
+			</section>
+			<script type="text/html" id="ds_info">
+			<dl class="dev_cm dev_pc editun">
+				<dt><icon></icon></dt>
+				<dd name="dd_ds_index">通道号: [index]</dd>
+				<dd name="dd_ds_freq">频率: [freq]</dd>
+				<dd name="dd_ds_state">状态: [state]</dd>
+				<dd name="dd_ds_channelid">通道ID：[channelid]</dd>
+				<dd name="dd_ds_modulation">调制方式：[modulation]</dd>
+				<dd name="dd_ds_symbolrate">符号率：[symbolrate]</dd>
+				<dd name="dd_ds_power">功率：[power]</dd>
+				<dd name="dd_ds_mer">信噪比：[mer]</dd>	
+			</dl>
+			</script>
+			<script type="text/html" id="us_info">
+			<dl class="dev_cm dev_pc editun">
+				<dt><icon></icon></dt>
+				<dd name="dd_us_index">通道号: [index]</dd>
+				<dd name="dd_us_freq">频率: [freq]</dd>
+				<dd name="dd_us_state">状态: [state]</dd>
+				<dd name="dd_us_channelid">通道ID：[channelid]</dd>
+				<dd name="dd_us_modulation">调制方式：[modulation]</dd>
+				<dd name="dd_us_symbolrate">符号率：[symbolrate]</dd>
+				<dd name="dd_us_power">功率：[power]</dd>
+			</dl>
+			</script>
+
+			<script type="text/javascript" src="js/cm-info.js"></script>	
+			</article>
+			</article>		
+		</content>
+		<!-- 底部 -->
+		<footer id="footer"><p>（copyright &copy;   2020 Radiotech All Right Reserved）</p></footer>
+	</div>
+</body>
+</html>
